@@ -1,4 +1,6 @@
 #include "ScoresScene.h"
+#include "MiniGolfData.h"
+
 #include "ConstValue.h"
 
 using namespace cocos2d;
@@ -34,6 +36,35 @@ bool ScoresScene::init() {
 	CCMenu* pMenu = CCMenu::menuWithItems(backButton, NULL);
 	pMenu->setPosition( CCPointZero );
 	this->addChild(pMenu, 1);
+	double bestTimes[7];
+	double lastTimes[7];
+	for(int i=0; i<7; i++) {
+		bestTimes[i]=MiniGolfData::getBestScore(i);
+		lastTimes[i]=MiniGolfData::getLastScore(i);
+	}
+	CCLabelTTF* bestTimesLabel[7];
+	CCLabelTTF* lastTimesLabel[7];
+	for(int i=0; i<7; i++) {
+		if(bestTimes[i]<0) {
+			bestTimesLabel[i] = CCLabelTTF::labelWithString("-", "Arial", 28*height/ConstValue::imageHeight);
+			bestTimesLabel[i]->setPosition( ccp(255*(width/ConstValue::imageWidth), (467.0-(i*57.0))*(height/ConstValue::imageHeight)) );
+			this->addChild(bestTimesLabel[i], 1);
+			lastTimesLabel[i] = CCLabelTTF::labelWithString("-", "Arial", 28*height/ConstValue::imageHeight);
+			lastTimesLabel[i]->setPosition( ccp(365*(width/ConstValue::imageWidth), (467.0-(i*57.0))*(height/ConstValue::imageHeight)) );
+			this->addChild(lastTimesLabel[i], 1);
+		} else {
+			char bestS[128];
+			sprintf(bestS,"%0.2f",bestTimes[i]);
+			char lastS[128];
+			sprintf(lastS,"%0.2f",lastTimes[i]);
+			bestTimesLabel[i] = CCLabelTTF::labelWithString(bestS, "Arial", 28*height/ConstValue::imageHeight);
+			bestTimesLabel[i]->setPosition( ccp(255*(width/ConstValue::imageWidth), (467.0-(i*57.0))*(height/ConstValue::imageHeight)) );
+			this->addChild(bestTimesLabel[i], 1);
+			lastTimesLabel[i] = CCLabelTTF::labelWithString(lastS, "Arial", 28*height/ConstValue::imageHeight);
+			lastTimesLabel[i]->setPosition( ccp(365*(width/ConstValue::imageWidth), (467.0-(i*57.0))*(height/ConstValue::imageHeight)) );
+			this->addChild(lastTimesLabel[i], 1);
+		}
+	}
 	return true;
 }
 

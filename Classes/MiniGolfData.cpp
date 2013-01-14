@@ -19,9 +19,13 @@ void MiniGolfData::unlockLevel(int levelNumber)
 	levelUnlocked = levelNumber;
 }
 
-void MiniGolfData::addScore(int levelNumber, double score)
+void MiniGolfData::addBestScore(int levelNumber, double score)
 {
 	bestTimes[levelNumber] = score;
+}
+
+void MiniGolfData::addLastScore(int levelNumber, double score)
+{
 	lastTimes[levelNumber] = score;
 }
 

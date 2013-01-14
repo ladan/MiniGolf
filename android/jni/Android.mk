@@ -14,7 +14,8 @@ LOCAL_SRC_FILES := helloworld/main.cpp \
                    ../../Classes/ScoresScene.cpp\
                    ../../Classes/InfoScene.cpp\
                    ../../Classes/MyContactListener.cpp\
-                   ../../Classes/MiniGolfData.cpp
+                   ../../Classes/MiniGolfData.cpp\
+                   ../../Classes/ScoresLevelScene.cpp
                    
    		   		                      
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes                   

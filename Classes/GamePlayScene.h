@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "Box2D/Box2D.h"
 #include "MyContactListener.h"
+#include <time.h>
 
 class GamePlayScene : public cocos2d::CCLayer {
 public:
@@ -11,6 +12,7 @@ public:
 	~GamePlayScene();
 	virtual bool init();
 	static cocos2d::CCScene* scene();
+	static cocos2d::CCScene* scene(int l);
 	virtual void keyBackClicked();
 	LAYER_NODE_FUNC(GamePlayScene);
 
@@ -25,6 +27,8 @@ private:
     b2Fixture *_ballFixture;
     b2Fixture *_holeFixture;
     int ptmRatio;
+    clock_t start, stop;
+    static int level;
 };
 
 #endif // __GAMEPLAY_SCENE_H__

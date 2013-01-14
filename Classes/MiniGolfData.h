@@ -11,7 +11,8 @@ class MiniGolfData
 {
 public:
 	static void unlockLevel(int levelNumber);
-	static void addScore(int levelNumber, double score);
+	static void addBestScore(int levelNumber, double score);
+	static void addLastScore(int levelNumber, double score);
 	static int  getMaxUnlockedLevel();
 	static double getBestScore(int level);
 	static double getLastScore(int level);
