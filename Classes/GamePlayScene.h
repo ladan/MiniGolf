@@ -23,9 +23,15 @@ private:
     b2Body *body;
     cocos2d::CCSprite *ball;
     cocos2d::CCSprite *hole;
+    cocos2d::CCSprite *pondSmall;
+    cocos2d::CCSprite *pondLarge;
+
+
     MyContactListener * contactListener;
     b2Fixture *_ballFixture;
     b2Fixture *_holeFixture;
+    b2Fixture *_pondSFixture;
+    b2Fixture *_pondLFixture;
     int ptmRatio;
     clock_t start, stop;
     static int level;

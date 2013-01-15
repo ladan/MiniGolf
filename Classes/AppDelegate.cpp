@@ -1,11 +1,13 @@
 #include "AppDelegate.h"
 #include "cocos2d.h"
 #include "MainMenuScene.h"
+#include "MiniGolfData.h"
 
 USING_NS_CC;
 
 
 AppDelegate::AppDelegate() {
+
 }
 
 AppDelegate::~AppDelegate() {
@@ -25,6 +27,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     pDirector->setOpenGLView(&CCEGLView::sharedOpenGLView());
 	pDirector->setDeviceOrientation(kCCDeviceOrientationPortrait);
 	pDirector->setAnimationInterval(1.0 / 60);
+	MiniGolfData::open();
 	CCScene *pScene = MainMenuScene::scene();
 	pDirector->runWithScene(pScene);
 	return true;

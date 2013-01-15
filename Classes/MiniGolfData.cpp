@@ -19,15 +19,19 @@ void MiniGolfData::unlockLevel(int levelNumber)
 	levelUnlocked = levelNumber;
 }
 
-void MiniGolfData::addBestScore(int levelNumber, double score)
-{
-	bestTimes[levelNumber] = score;
-}
-
-void MiniGolfData::addLastScore(int levelNumber, double score)
+void MiniGolfData::addScore(int levelNumber, double score)
 {
 	lastTimes[levelNumber] = score;
+	if(bestTimes[levelNumber] == -1)
+	{
+		bestTimes[levelNumber] = score;
+	}
+	else if(bestTimes[levelNumber] > score)
+	{
+		bestTimes[levelNumber] = score;
+	}
 }
+
 
 int MiniGolfData::getMaxUnlockedLevel()
 {
@@ -62,23 +66,36 @@ std::vector<std::string> split(const std::string &s, char delim) {
 
 void MiniGolfData::save()
 {
+	CCLOG("Saving Level = %d", levelUnlocked);
+	for(int i = 0; i < 7; ++i)
+	{
+		CCLOG("%d best = %f, last = %f", i,bestTimes[i], lastTimes[i]);
+	}
 	string path = getFilePath();
-	ofstream myfile (path.c_str());
+	ofstream myfile (path.c_str(), ios::trunc);
 	if (myfile.is_open())
 	{
 		string best = "";
 		string last = "";
+
+
 		for(int i = 0; i < 7; ++i)
 		{
-			best += bestTimes[i];
+			ostringstream bestTime;
+			bestTime << bestTimes[i];
+			best += bestTime.str();
 			best +=" ";
-			last += lastTimes[i];
+			ostringstream lastTime;
+			lastTime << lastTimes[i];
+			last += lastTime.str();
 			last +=" ";
 
 		}
-	    myfile << levelUnlocked;
-	    myfile << best;
-	    myfile << last;
+		myfile << levelUnlocked << endl;
+	    myfile << best << endl;
+	    myfile << last << endl;
+	    CCLOG("best = %s", best.c_str());
+	    CCLOG("last = %s", last.c_str());
 	    myfile.close();
 	}
 

@@ -23,7 +23,7 @@ bool LevelScene::init() {
     this->setIsKeypadEnabled(true);
     float width=CCDirector::sharedDirector()->getWinSize().width;
     float height=CCDirector::sharedDirector()->getWinSize().height;
-    MiniGolfData::open();
+
     maxlevel=MiniGolfData::getMaxUnlockedLevel()+1;
     //maxlevel=7;
     CCMenuItemImage* levelButton[6];

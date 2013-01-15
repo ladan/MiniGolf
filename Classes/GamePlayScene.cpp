@@ -150,13 +150,13 @@ bool GamePlayScene::init() {
 	CCSize barrierLevel4_1_Size, barrierLevel4_2_Size, barrierLevel4_3_Size, barrierLevel4_4_Size;
 	CCSize barrierLevel5_1_Size, barrierLevel5_2_Size, barrierLevel5_3_Size;
 	CCSize barrierLevel6_1_Size;
-	b2BodyDef ballBodyDef, holeBodyDef, barrierLevel2_1_BodyDef, barrierLevel3_1_BodyDef, barrierLevel3_2_BodyDef;
+	b2BodyDef ballBodyDef, holeBodyDef, barrierLevel2_1_BodyDef, barrierLevel3_1_BodyDef, barrierLevel3_2_BodyDef, pondSmallBodyDef,pondLargeBodyDef;
 	b2BodyDef barrierLevel4_1_BodyDef, barrierLevel4_2_BodyDef, barrierLevel4_3_BodyDef, barrierLevel4_4_BodyDef;
 	b2BodyDef barrierLevel5_1_BodyDef, barrierLevel5_2_BodyDef, barrierLevel5_3_BodyDef;
 	b2BodyDef barrierLevel6_1_BodyDef;
-	CCPoint ballPos, holePos;
+	CCPoint ballPos, holePos, pondSmallPos,pondLargePos;
 	b2CircleShape circle;
-	b2FixtureDef ballShapeDef, holeShapeDef;
+	b2FixtureDef ballShapeDef, holeShapeDef, pondSShapeDef,pondLShapeDef;
 	CCSprite *barrierLevel2_1_, *barrierLevel3_1_, *barrierLevel3_2_;
 	CCSprite *barrierLevel4_1_, *barrierLevel4_2_, *barrierLevel4_3_, *barrierLevel4_4_;
 	CCSprite *barrierLevel5_1_, *barrierLevel5_2_, *barrierLevel5_3_;
@@ -207,6 +207,23 @@ bool GamePlayScene::init() {
 		holeShapeDef.friction = 0.2f;
 		holeShapeDef.restitution = 0.2f;
 		_holeFixture =  body->CreateFixture(&holeShapeDef);
+		// pond
+		pondSmall = CCSprite::spriteWithFile("pondSmall.png");
+		pondSmall->setPosition(ccp(winSize.width /2, winSize.height / 2 - 100));
+		pondSmall->setScale(height/ConstValue::imageHeight);
+		pondSmall->setTag(BARRIER);
+		this->addChild(pondSmall, 1);
+		pondSmallBodyDef.type = b2_staticBody;
+		pondSmallPos = pondSmall->getPosition();
+		pondSmallBodyDef.position.Set((pondSmallPos.x)/ptmRatio, (pondSmallPos.y)/ptmRatio);
+		pondSmallBodyDef.userData = pondSmall;
+		body = world->CreateBody(&pondSmallBodyDef);
+		circle.m_radius = pondSmall->getTexture()->getContentSize().width / 2 / ptmRatio;
+		pondSShapeDef.shape = &circle;
+		pondSShapeDef.density = 0.6f;
+		pondSShapeDef.friction = 0.2f;
+		pondSShapeDef.restitution = 0.2f;
+		_pondSFixture =  body->CreateFixture(&pondSShapeDef);
 		break;
 	case 2:
 		// ball
@@ -244,6 +261,23 @@ bool GamePlayScene::init() {
 		holeShapeDef.friction = 0.2f;
 		holeShapeDef.restitution = 0.2f;
 		_holeFixture =  body->CreateFixture(&holeShapeDef);
+		// pond LArge
+		pondLarge = CCSprite::spriteWithFile("pondLarge.png");
+		pondLarge->setPosition(ccp(winSize.width /2, winSize.height / 2 + 100));
+		pondLarge->setScale(height/ConstValue::imageHeight);
+		pondLarge->setTag(BARRIER);
+		this->addChild(pondLarge, 1);
+		pondLargeBodyDef.type = b2_staticBody;
+		pondLargePos = pondLarge->getPosition();
+		pondLargeBodyDef.position.Set((pondLargePos.x)/ptmRatio, (pondLargePos.y)/ptmRatio);
+		pondLargeBodyDef.userData = pondLarge;
+		body = world->CreateBody(&pondLargeBodyDef);
+		circle.m_radius = pondLarge->getTexture()->getContentSize().width / 2 / ptmRatio;
+		pondLShapeDef.shape = &circle;
+		pondLShapeDef.density = 0.6f;
+		pondLShapeDef.friction = 0.2f;
+		pondLShapeDef.restitution = 0.2f;
+		_pondLFixture =  body->CreateFixture(&pondLShapeDef);
 		 //barrier_level2
 		barrierLevel2_1_ = CCSprite::spriteWithFile("barrier_level2.png");
 		barrierLevel2_1_->setScaleX(ratiox);
@@ -299,6 +333,40 @@ bool GamePlayScene::init() {
 		holeShapeDef.friction = 0.2f;
 		holeShapeDef.restitution = 0.2f;
 		_holeFixture =  body->CreateFixture(&holeShapeDef);
+		// pond
+		pondSmall = CCSprite::spriteWithFile("pondSmall.png");
+		pondSmall->setPosition(ccp(winSize.width/2-(150.0*ratiox), 150.0*ratioy - 70));
+		pondSmall->setScale(height/ConstValue::imageHeight);
+		pondSmall->setTag(BARRIER);
+		this->addChild(pondSmall, 1);
+		pondSmallBodyDef.type = b2_staticBody;
+		pondSmallPos = pondSmall->getPosition();
+		pondSmallBodyDef.position.Set((pondSmallPos.x)/ptmRatio, (pondSmallPos.y)/ptmRatio);
+		pondSmallBodyDef.userData = pondSmall;
+		body = world->CreateBody(&pondSmallBodyDef);
+		circle.m_radius = pondSmall->getTexture()->getContentSize().width / 2 / ptmRatio;
+		pondSShapeDef.shape = &circle;
+		pondSShapeDef.density = 0.6f;
+		pondSShapeDef.friction = 0.2f;
+		pondSShapeDef.restitution = 0.2f;
+		_pondSFixture =  body->CreateFixture(&pondSShapeDef);
+		// pond LArge
+		pondLarge = CCSprite::spriteWithFile("pondLarge.png");
+		pondLarge->setPosition(ccp(winSize.width /2 + 100, winSize.height / 2 + 200));
+		pondLarge->setScale(height/ConstValue::imageHeight);
+		pondLarge->setTag(BARRIER);
+		this->addChild(pondLarge, 1);
+		pondLargeBodyDef.type = b2_staticBody;
+		pondLargePos = pondLarge->getPosition();
+		pondLargeBodyDef.position.Set((pondLargePos.x)/ptmRatio, (pondLargePos.y)/ptmRatio);
+		pondLargeBodyDef.userData = pondLarge;
+		body = world->CreateBody(&pondLargeBodyDef);
+		circle.m_radius = pondLarge->getTexture()->getContentSize().width / 2 / ptmRatio;
+		pondLShapeDef.shape = &circle;
+		pondLShapeDef.density = 0.6f;
+		pondLShapeDef.friction = 0.2f;
+		pondLShapeDef.restitution = 0.2f;
+		_pondLFixture =  body->CreateFixture(&pondLShapeDef);
 		//barrier_level3_1
 		barrierLevel3_1_ = CCSprite::spriteWithFile("barrier_level3.png");
 		barrierLevel3_1_Size = barrierLevel3_1_->getTextureRect().size;
@@ -481,6 +549,23 @@ bool GamePlayScene::init() {
 		holeShapeDef.friction = 0.2f;
 		holeShapeDef.restitution = 0.2f;
 		_holeFixture =  body->CreateFixture(&holeShapeDef);
+		// pond
+		pondSmall = CCSprite::spriteWithFile("pondSmall.png");
+		pondSmall->setPosition(ccp(winSize.width/2, 250.0*ratioy + 60));
+		pondSmall->setScale(height/ConstValue::imageHeight);
+		pondSmall->setTag(BARRIER);
+		this->addChild(pondSmall, 1);
+		pondSmallBodyDef.type = b2_staticBody;
+		pondSmallPos = pondSmall->getPosition();
+		pondSmallBodyDef.position.Set((pondSmallPos.x)/ptmRatio, (pondSmallPos.y)/ptmRatio);
+		pondSmallBodyDef.userData = pondSmall;
+		body = world->CreateBody(&pondSmallBodyDef);
+		circle.m_radius = pondSmall->getTexture()->getContentSize().width / 2 / ptmRatio;
+		pondSShapeDef.shape = &circle;
+		pondSShapeDef.density = 0.6f;
+		pondSShapeDef.friction = 0.2f;
+		pondSShapeDef.restitution = 0.2f;
+		_pondSFixture =  body->CreateFixture(&pondSShapeDef);
 		//barrier_Level5_1
 		barrierLevel5_1_ = CCSprite::spriteWithFile("barrier_level5_1.png");
 		barrierLevel5_1_Size = barrierLevel5_1_->getTextureRect().size;
@@ -681,6 +766,8 @@ bool GamePlayScene::init() {
 		holeShapeDef.friction = 0.2f;
 		holeShapeDef.restitution = 0.2f;
 		_holeFixture =  body->CreateFixture(&holeShapeDef);
+
+
 		//barrier_Level4_1
 		barrierLevel4_1_ = CCSprite::spriteWithFile("barrier_level4.png");
 		barrierLevel4_1_Size = barrierLevel4_1_->getTextureRect().size;
@@ -814,9 +901,20 @@ void GamePlayScene::tick(cocos2d::ccTime delta) {
 		if ((contact.fixtureA == _holeFixture && contact.fixtureB == _ballFixture) ||
 			(contact.fixtureA == _ballFixture && contact.fixtureB == _holeFixture)) {
 			stop=clock();
-			CCScene* resultScene = ScoresLevelScene::scene(level,(stop-start)/(CLOCKS_PER_SEC*1.0));
+			CCScene* resultScene = ScoresLevelScene::scene(level,(stop-start)/(CLOCKS_PER_SEC*1.0),false);
 			CCDirector::sharedDirector()->pushScene( resultScene );
+		}else if ((contact.fixtureA == _pondSFixture && contact.fixtureB == _ballFixture) ||
+				(contact.fixtureA == _ballFixture && contact.fixtureB == _pondSFixture)) {
+				stop=clock();
+				CCScene* resultScene = ScoresLevelScene::scene(level,(stop-start)/(CLOCKS_PER_SEC*1.0), true);
+				CCDirector::sharedDirector()->pushScene( resultScene );
+		}else if ((contact.fixtureA == _pondLFixture && contact.fixtureB == _ballFixture) ||
+				(contact.fixtureA == _ballFixture && contact.fixtureB == _pondLFixture)) {
+				stop=clock();
+				CCScene* resultScene = ScoresLevelScene::scene(level,(stop-start)/(CLOCKS_PER_SEC*1.0), true);
+				CCDirector::sharedDirector()->pushScene( resultScene );
 		}
+
 	}
 }
 
