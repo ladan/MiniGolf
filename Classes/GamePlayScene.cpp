@@ -209,8 +209,8 @@ bool GamePlayScene::init() {
 		_holeFixture =  body->CreateFixture(&holeShapeDef);
 		// pond
 		pondSmall = CCSprite::spriteWithFile("pondSmall.png");
-		pondSmall->setPosition(ccp(winSize.width /2, winSize.height / 2 - 100));
-		pondSmall->setScale(height/ConstValue::imageHeight);
+		pondSmall->setPosition(ccp(winSize.width /2, winSize.height / 2 - 100.0*ratioy));
+		pondSmall->setScale(ratioy);
 		pondSmall->setTag(BARRIER);
 		this->addChild(pondSmall, 1);
 		pondSmallBodyDef.type = b2_staticBody;
@@ -218,7 +218,7 @@ bool GamePlayScene::init() {
 		pondSmallBodyDef.position.Set((pondSmallPos.x)/ptmRatio, (pondSmallPos.y)/ptmRatio);
 		pondSmallBodyDef.userData = pondSmall;
 		body = world->CreateBody(&pondSmallBodyDef);
-		circle.m_radius = pondSmall->getTexture()->getContentSize().width / 2 / ptmRatio;
+		circle.m_radius = (pondSmall->getTexture()->getContentSize().width*ratioy)/2 / ptmRatio;
 		pondSShapeDef.shape = &circle;
 		pondSShapeDef.density = 0.6f;
 		pondSShapeDef.friction = 0.2f;
@@ -263,8 +263,8 @@ bool GamePlayScene::init() {
 		_holeFixture =  body->CreateFixture(&holeShapeDef);
 		// pond LArge
 		pondLarge = CCSprite::spriteWithFile("pondLarge.png");
-		pondLarge->setPosition(ccp(winSize.width /2, winSize.height / 2 + 100));
-		pondLarge->setScale(height/ConstValue::imageHeight);
+		pondLarge->setPosition(ccp(winSize.width /2, winSize.height / 2 + 100*ratioy));
+		pondLarge->setScale(ratioy);
 		pondLarge->setTag(BARRIER);
 		this->addChild(pondLarge, 1);
 		pondLargeBodyDef.type = b2_staticBody;
@@ -272,7 +272,7 @@ bool GamePlayScene::init() {
 		pondLargeBodyDef.position.Set((pondLargePos.x)/ptmRatio, (pondLargePos.y)/ptmRatio);
 		pondLargeBodyDef.userData = pondLarge;
 		body = world->CreateBody(&pondLargeBodyDef);
-		circle.m_radius = pondLarge->getTexture()->getContentSize().width / 2 / ptmRatio;
+		circle.m_radius = (pondLarge->getTexture()->getContentSize().width*ratioy) / 2 / ptmRatio;
 		pondLShapeDef.shape = &circle;
 		pondLShapeDef.density = 0.6f;
 		pondLShapeDef.friction = 0.2f;
@@ -335,8 +335,8 @@ bool GamePlayScene::init() {
 		_holeFixture =  body->CreateFixture(&holeShapeDef);
 		// pond
 		pondSmall = CCSprite::spriteWithFile("pondSmall.png");
-		pondSmall->setPosition(ccp(winSize.width/2-(150.0*ratiox), 150.0*ratioy - 70));
-		pondSmall->setScale(height/ConstValue::imageHeight);
+		pondSmall->setPosition(ccp(winSize.width/2-(150.0*ratiox), 80.0*ratioy));
+		pondSmall->setScale(ratioy);
 		pondSmall->setTag(BARRIER);
 		this->addChild(pondSmall, 1);
 		pondSmallBodyDef.type = b2_staticBody;
@@ -352,8 +352,8 @@ bool GamePlayScene::init() {
 		_pondSFixture =  body->CreateFixture(&pondSShapeDef);
 		// pond LArge
 		pondLarge = CCSprite::spriteWithFile("pondLarge.png");
-		pondLarge->setPosition(ccp(winSize.width /2 + 100, winSize.height / 2 + 200));
-		pondLarge->setScale(height/ConstValue::imageHeight);
+		pondLarge->setPosition(ccp(winSize.width /2 + 100.0*ratiox, winSize.height / 2 + 200.0*ratioy));
+		pondLarge->setScale(ratioy);
 		pondLarge->setTag(BARRIER);
 		this->addChild(pondLarge, 1);
 		pondLargeBodyDef.type = b2_staticBody;
@@ -361,7 +361,7 @@ bool GamePlayScene::init() {
 		pondLargeBodyDef.position.Set((pondLargePos.x)/ptmRatio, (pondLargePos.y)/ptmRatio);
 		pondLargeBodyDef.userData = pondLarge;
 		body = world->CreateBody(&pondLargeBodyDef);
-		circle.m_radius = pondLarge->getTexture()->getContentSize().width / 2 / ptmRatio;
+		circle.m_radius = (pondLarge->getTexture()->getContentSize().width*ratiox) / 2 / ptmRatio;
 		pondLShapeDef.shape = &circle;
 		pondLShapeDef.density = 0.6f;
 		pondLShapeDef.friction = 0.2f;
@@ -551,8 +551,8 @@ bool GamePlayScene::init() {
 		_holeFixture =  body->CreateFixture(&holeShapeDef);
 		// pond
 		pondSmall = CCSprite::spriteWithFile("pondSmall.png");
-		pondSmall->setPosition(ccp(winSize.width/2, 250.0*ratioy + 60));
-		pondSmall->setScale(height/ConstValue::imageHeight);
+		pondSmall->setPosition(ccp(winSize.width/2, 310.0*ratioy));
+		pondSmall->setScale(ratioy);
 		pondSmall->setTag(BARRIER);
 		this->addChild(pondSmall, 1);
 		pondSmallBodyDef.type = b2_staticBody;
@@ -560,7 +560,7 @@ bool GamePlayScene::init() {
 		pondSmallBodyDef.position.Set((pondSmallPos.x)/ptmRatio, (pondSmallPos.y)/ptmRatio);
 		pondSmallBodyDef.userData = pondSmall;
 		body = world->CreateBody(&pondSmallBodyDef);
-		circle.m_radius = pondSmall->getTexture()->getContentSize().width / 2 / ptmRatio;
+		circle.m_radius = (pondSmall->getTexture()->getContentSize().width*ratioy) / 2 / ptmRatio;
 		pondSShapeDef.shape = &circle;
 		pondSShapeDef.density = 0.6f;
 		pondSShapeDef.friction = 0.2f;

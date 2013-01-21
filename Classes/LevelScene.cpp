@@ -170,5 +170,6 @@ void LevelScene::setMainMenuSceneCallback( CCObject* pSender) {
 
 //------------------------------------------------------
 void LevelScene::keyBackClicked() {
-	CCDirector::sharedDirector()->end();
+	CCScene* mainMenuScene = MainMenuScene::scene();
+	CCDirector::sharedDirector()->pushScene( mainMenuScene );
 }
